@@ -10,35 +10,23 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'ID'; //por defecto coge la columna que se llame id
+
+    // public $incrementing = true; por defecto es true
+
+    // protected $keyType = 'INT'; pordefecto se considera INT
+
+    public $timestamps = false;
 
     /**
-     * The attributes that are mass assignable.
+     * Get all of the collections for the Rider
      *
-     * @var array<int, string>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+     
 }
